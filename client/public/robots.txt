@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Priority pages for crawling
+Allow: /products
+Allow: /recipes
+Allow: /store-locator
+Allow: /blog
+
+# Block admin and auth pages
+Disallow: /admin
+Disallow: /auth
+Disallow: /api
+
+# Block temporary files
+Disallow: /temp
+Disallow: /*.tmp$
+
+# Sitemap location
+Sitemap: https://saltandscoville.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
