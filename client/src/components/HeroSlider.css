@@ -1,0 +1,337 @@
+
+/* Advanced crossfade slider with faster invisible transitions */
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  height: 100vh;
+  will-change: transform, opacity;
+  isolation: isolate;
+}
+
+.slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  will-change: transform, opacity;
+  isolation: isolate;
+}
+
+.slick-list:focus {
+  outline: none;
+}
+
+.slick-list.dragging {
+  cursor: pointer;
+  cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+  will-change: transform, opacity;
+  isolation: isolate;
+}
+
+.slick-track:before,
+.slick-track:after {
+  display: table;
+  content: '';
+}
+
+.slick-track:after {
+  clear: both;
+}
+
+.slick-loading .slick-track {
+  visibility: hidden;
+}
+
+/* Advanced slide configuration for faster crossfade */
+.slick-slide {
+  display: none;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  will-change: transform, opacity, filter, brightness;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0) scale(1.01);
+  -webkit-transform: translateZ(0) scale(1.01);
+  isolation: isolate;
+  z-index: 1;
+}
+
+[dir='rtl'] .slick-slide {
+  float: right;
+}
+
+.slick-slide img {
+  display: block;
+}
+
+.slick-slide.slick-loading img {
+  display: none;
+}
+
+.slick-slide.dragging img {
+  pointer-events: none;
+}
+
+.slick-initialized .slick-slide {
+  display: block;
+}
+
+.slick-loading .slick-slide {
+  visibility: hidden;
+}
+
+.slick-vertical .slick-slide {
+  display: block;
+  height: auto;
+  border: 1px solid transparent;
+}
+
+.slick-slide > div {
+  height: 100vh;
+  will-change: transform, opacity, filter;
+  isolation: isolate;
+}
+
+/* Hide default slick controls */
+.slick-dots {
+  display: none !important;
+}
+
+.slick-arrow {
+  display: none !important;
+}
+
+/* Faster crossfade keyframes */
+@keyframes fast-fade-in {
+  0% {
+    opacity: 0;
+    filter: brightness(0.98) contrast(0.98) blur(0.3px);
+    transform: translateZ(0) scale(1.003);
+  }
+  25% {
+    opacity: 0.3;
+    filter: brightness(0.99) contrast(0.99) blur(0.15px);
+    transform: translateZ(0) scale(1.002);
+  }
+  60% {
+    opacity: 0.8;
+    filter: brightness(0.995) contrast(0.995) blur(0.05px);
+    transform: translateZ(0) scale(1.001);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) contrast(1) blur(0px);
+    transform: translateZ(0) scale(1);
+  }
+}
+
+@keyframes fast-fade-out {
+  0% {
+    opacity: 1;
+    filter: brightness(1) contrast(1) blur(0px);
+    transform: translateZ(0) scale(1);
+  }
+  40% {
+    opacity: 0.8;
+    filter: brightness(0.995) contrast(0.995) blur(0.05px);
+    transform: translateZ(0) scale(1.001);
+  }
+  75% {
+    opacity: 0.3;
+    filter: brightness(0.99) contrast(0.99) blur(0.15px);
+    transform: translateZ(0) scale(1.002);
+  }
+  100% {
+    opacity: 0;
+    filter: brightness(0.98) contrast(0.98) blur(0.3px);
+    transform: translateZ(0) scale(1.003);
+  }
+}
+
+@keyframes quick-breath {
+  0% {
+    transform: translateZ(0) scale(1);
+  }
+  50% {
+    transform: translateZ(0) scale(1.001);
+  }
+  100% {
+    transform: translateZ(0) scale(1);
+  }
+}
+
+/* Advanced fast crossfade system */
+.slick-slider.slick-fade .slick-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+  transition: none;
+  animation-fill-mode: both;
+}
+
+/* Active slide with faster visibility */
+.slick-slider.slick-fade .slick-slide.slick-active {
+  opacity: 1;
+  z-index: 3;
+  animation: fast-fade-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+             quick-breath 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Current slide enhancement */
+.slick-slider.slick-fade .slick-slide.slick-current {
+  opacity: 1;
+  z-index: 3;
+}
+
+/* Outgoing slide with faster fade */
+.slick-slider.slick-fade .slick-slide:not(.slick-active):not(.slick-current) {
+  opacity: 0;
+  z-index: 2;
+  animation: fast-fade-out 0.8s cubic-bezier(0.55, 0.06, 0.68, 0.19);
+}
+
+/* Enhanced blending overlay for natural transitions */
+.slick-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.01) 0%,
+    transparent 25%,
+    transparent 75%,
+    rgba(0, 0, 0, 0.01) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  mix-blend-mode: multiply;
+}
+
+.slick-slide.slick-active::before {
+  opacity: 1;
+}
+
+/* Advanced blending for seamless color transitions */
+.slick-slide::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.005) 70%,
+    rgba(0, 0, 0, 0.01) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  mix-blend-mode: soft-light;
+}
+
+.slick-slide.slick-active::after {
+  opacity: 1;
+}
+
+/* Natural image background enhancements */
+.slick-slide [style*="background-image"] {
+  transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity, filter;
+  filter: brightness(1) contrast(1.02) saturate(1.05);
+  transform: translateZ(0);
+  mix-blend-mode: normal;
+}
+
+/* Performance optimizations for flawless rendering */
+.slick-slider,
+.slick-list,
+.slick-track,
+.slick-slide {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, opacity, filter;
+  contain: layout style paint;
+}
+
+/* Enhanced font smoothing for crisp overlays */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .slick-slide {
+    animation-duration: 0.5s;
+  }
+  
+  @keyframes fast-fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes fast-fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes quick-breath {
+    0%, 100% { transform: translateZ(0) scale(1); }
+  }
+}
+
+/* GPU acceleration enforcement */
+.slick-slider * {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
